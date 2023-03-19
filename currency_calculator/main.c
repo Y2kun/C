@@ -7,7 +7,7 @@
 #define swiss 1.08
 #define lira 9.01
 
-//The functions
+// The functions
 void start();
 int select(int);
 float convertor(int);
