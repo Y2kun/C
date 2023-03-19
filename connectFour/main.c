@@ -6,6 +6,8 @@
 #define P1 'x'
 #define P2 'o'
 
+//Incomplete
+
 int getMove(char board[HEIGHT][WIDTH], char player);
 void draw(char board[HEIGHT][WIDTH]);
 int gravity(char board[HEIGHT][WIDTH], int);
