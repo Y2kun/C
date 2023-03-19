@@ -5,6 +5,8 @@
 #define WIDTH 3
 #define HIGHT 3
 
+//Incomplete
+
 void draw(char array[WIDTH] [HIGHT]);
 
 int main() {
