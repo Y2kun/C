@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 //The Conversions
 #define euro 1.0
