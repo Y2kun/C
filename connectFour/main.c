@@ -138,8 +138,6 @@ int winCheck(char board[HEIGHT][WIDTH]) {
                 for(int i = 0; i < WINLENGHT; i++) {board[x-i][y+i] = P2-32;}
                 return P2;
             }
-
-
         }
     }
     return -1;
