@@ -47,7 +47,7 @@ int main() {
 
         count++;
     }
-    printf("It is a draw!!!");
+    printf("It's a draw!!!");
 }
 
 int getMove(char board[HEIGHT][WIDTH], char player) {
