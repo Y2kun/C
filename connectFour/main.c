@@ -2,7 +2,7 @@
 
 #define HEIGHT 6
 #define WIDTH 7
-#define WINLENGHT 4
+#define WINLENGTH 4
 #define NOBODY '\0'
 #define P1 'x'
 #define P2 'o'
@@ -88,57 +88,57 @@ int gravity(char board[HEIGHT][WIDTH], int x) {
 
 int winCheck(char board[HEIGHT][WIDTH]) {
     // Did anybody win horizontally?
-    for (int x = 0; x < HEIGHT; x++) {
-        for (int y = 0; y < 4; y++) {
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
             int res = board[x][y] + board[x][y+1] + board[x][y+2] + board[x][y+3];
             if (res == P1*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x][y+i] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x][y+i] = P1-32;}
                 return P1;
             }
             if (res == P2*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x][y+1] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x][y+1] = P2-32;}
                 return P2;
             }
         }
     }
     // Did anybody win vertically?
-    for (int x = 0; x < 3; x++) {
-        for (int y = 0; y < WIDTH; y++) {
+    for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
             int res = board[x][y] + board[x+1][y] + board[x+2][y] + board[+3][y];
             if (res == P1*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y] = P1-32;}
                 return P1;
             }
             if (res == P2*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y] = P2-32;}
                 return P2;
             }
         }
     }
     // Did anybody win diagonally? (top left-bottom right)
-    for (int x = 0; x < HEIGHT; x++) {
-        for (int y = 0; y < 4; y++) {
+    for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
+        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
             int res = board[x][y] + board[x+1][y+1] + board[x+2][y+2] + board[x+3][y+3];
             if (res == P1*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y+i] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y+i] = P1-32;}
                 return P1;
             }
             if (res == P2*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y+i] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y+i] = P2-32;}
                 return P2;
             }
         }
     }
     // Did anybody win diagonally? (top right-bottom left)
-    for (int x = 0; x < 3; x++) {
-        for (int y = 0; y < 4; y++) {
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
             int res = board[x][y] + board[x-1][y+1] + board[x-2][y+2] + board[-3][y+3];
             if (res == P1*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x-i][y+i] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x-i][y+i] = P1-32;}
                 return P1;
             }
             if (res == P2*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x-i][y+i] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x-i][y+i] = P2-32;}
                 return P2;
             }
         }
