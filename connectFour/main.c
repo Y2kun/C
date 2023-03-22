@@ -7,7 +7,7 @@
 #define P1 'x'
 #define P2 'o'
 
-//Could be better, but works
+//Could be better, but works with a few flaws
 
 int getMove(char board[HEIGHT][WIDTH], char player);
 void draw(char board[HEIGHT][WIDTH]);
@@ -89,11 +89,11 @@ int winCheck(char board[HEIGHT][WIDTH]) {
         for (int y = 0; y < HEIGHT; y++) {
             int res = board[x][y] + board[x][y+1] + board[x][y+2] + board[x][y+3];
             if (res == P1*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y] = P1-32;}
+                for(int i = 0; i < WINLENGHT; i++) {board[x][y+i] = P1-32;}
                 return P1;
             }
             if (res == P2*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x+1][y] = P2-32;}
+                for(int i = 0; i < WINLENGHT; i++) {board[x][y+1] = P2-32;}
                 return P2;
             }
         }
@@ -103,11 +103,11 @@ int winCheck(char board[HEIGHT][WIDTH]) {
         for (int y = 0; y < HEIGHT; y++) {
             int res = board[x][y] + board[x+1][y] + board[x+2][y] + board[+3][y];
             if (res == P1*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x][y+i] = P1-32;}
+                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y] = P1-32;}
                 return P1;
             }
             if (res == P2*4) {
-                for(int i = 0; i < WINLENGHT; i++) {board[x][y+i] = P2-32;}
+                for(int i = 0; i < WINLENGHT; i++) {board[x+i][y] = P2-32;}
                 return P2;
             }
         }
