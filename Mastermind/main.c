@@ -5,8 +5,6 @@
 #define LENGTH 4
 #define MAXTEMPT 12
 
-// WORK IN PROGRESS
-
 int main() {
     srand(time(NULL));
     int initKey[LENGTH] = {};
@@ -30,7 +28,7 @@ int main() {
 
     printf("MASTERMIND\n\n");
     printf("I have already selected %i Letters, Its your turn\n", LENGTH);
-    printf("All possible Letters are the following:  A B C D E F");
+    printf("All possible Letters are the following: A B C D E F");
 
     for(int l = 0; l < MAXTEMPT; l++) {
         int correct = 0, similar = 0;
@@ -42,10 +40,10 @@ int main() {
 
         //Comparisons
         for(int i = 0; i < LENGTH; i++) {
-            if(input[i] == key[i]) {correct++;}
+            if(input[i] == key[i] || input[i] - 32 == key[i]) {correct++;}
             else {
-                for(int z = 0; z < LENGTH; z++) {
-                    if(input[i] == key[z]) {similar++;}
+                for(int j = 0; j < LENGTH; j++) {
+                    if(input[i] == key[j] || input[i] - 32 == key[j]) {similar++;}
                 }
             }
         }
@@ -55,6 +53,7 @@ int main() {
         //Information
         printf("Correct count is: %i\n", correct);
         printf("Similar count is: %i\n", similar);
+        printf("The key is: %s\n", key);
     }
     //LOSING
     printf("You lost, how unfortunate :|, please play again");

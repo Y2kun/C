@@ -27,7 +27,7 @@ int main() {
         x = getMove(board, P1);
         y = gravity(board, x);
         if (y != -1) {board[y][x] = P1;}
-        if (winCheck(board) != -1) {
+        if (winCheck(board) == P1) {
             draw(board);
             printf("Player %c WINS!!!\n", P1);
             return 0;
@@ -38,7 +38,7 @@ int main() {
         x = getMove(board, P2);
         y = gravity(board, x);
         if (y != -1) {board[y][x] = P2;}
-        if (winCheck(board) != -1) {
+        if (winCheck(board) == P2) {
             draw(board);
             printf("Player %c WINS!!!\n", P2);
             return 0;
@@ -143,5 +143,5 @@ int winCheck(char board[HEIGHT][WIDTH]) {
             }
         }
     }
-    return -1;
+    return 0;
 }
