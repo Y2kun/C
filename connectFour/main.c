@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define HEIGHT 6
 #define WIDTH 7
@@ -9,50 +10,42 @@
 
 //It`s alive!!!
 
-int getMove(char board[HEIGHT][WIDTH], char player);
+void turn(char board[HEIGHT][WIDTH], char p);
+int getMove(char board[HEIGHT][WIDTH], char p);
 void draw(char board[HEIGHT][WIDTH]);
 int gravity(char board[HEIGHT][WIDTH], int);
 int winCheck(char board[HEIGHT][WIDTH]);
 
 int main() {
     char board[HEIGHT][WIDTH] = {NOBODY};
-    int y, x, count = 0;
-
     printf("CONNECT FOUR: THE GAME\n\n");
     draw(board);
 
-    //Mainloop
-    while (count < HEIGHT * WIDTH) {
-        //Player 1
-        x = getMove(board, P1);
-        y = gravity(board, x);
-        if (y != -1) {board[y][x] = P1;}
-        if (winCheck(board) == P1) {
-            draw(board);
-            printf("Player %c WINS!!!\n", P1);
-            return 0;
-        }
-        draw(board);
-
-        //Player 2
-        x = getMove(board, P2);
-        y = gravity(board, x);
-        if (y != -1) {board[y][x] = P2;}
-        if (winCheck(board) == P2) {
-            draw(board);
-            printf("Player %c WINS!!!\n", P2);
-            return 0;
-        }
-        draw(board);
-
-        count++;
+    //Main
+    for (int i = 0; i < HEIGHT * WIDTH; i++) {
+        turn(board, P1); //Player 1
+        turn(board, P2); //Player 2
     }
     printf("It's a draw!!!");
+    return 0;
 }
 
-int getMove(char board[HEIGHT][WIDTH], char player) {
+void turn(char board[HEIGHT][WIDTH], char p) {
+    int y, x;
+    x = getMove(board, p);
+    y = gravity(board, x);
+    if (y != -1) {board[y][x] = p;}
+    if (winCheck(board) == p) {
+        draw(board);
+        printf("Player %c WINS!!!\n", p);
+        exit(0);
+    }
+    draw(board);
+}
+
+int getMove(char board[HEIGHT][WIDTH], char p) {
     int x = -1;
-    printf("Place %c at,(1-%i) :", player, WIDTH);
+    printf("Place %c at,(1-%i) :", p, WIDTH);
 
     while (x < 0 || x > WIDTH && board[HEIGHT - 1][x] != NOBODY) {
         scanf("%i", &x);
