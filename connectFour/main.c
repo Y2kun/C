@@ -10,8 +10,8 @@
 
 //It`s alive!!!
 
-void turn(char board[HEIGHT][WIDTH], char p);
-int getMove(char board[HEIGHT][WIDTH], char p);
+void active(char board[HEIGHT][WIDTH], char);
+int getMove(char board[HEIGHT][WIDTH], char);
 void draw(char board[HEIGHT][WIDTH]);
 int gravity(char board[HEIGHT][WIDTH], int);
 int winCheck(char board[HEIGHT][WIDTH]);
@@ -23,14 +23,14 @@ int main() {
 
     //Main
     for (int i = 0; i < HEIGHT * WIDTH; i++) {
-        turn(board, P1); //Player 1
-        turn(board, P2); //Player 2
+        active(board, P1); //Player 1
+        active(board, P2); //Player 2
     }
     printf("It's a draw!!!");
     return 0;
 }
 
-void turn(char board[HEIGHT][WIDTH], char p) {
+void active(char board[HEIGHT][WIDTH], char p) {
     int y, x;
     x = getMove(board, p);
     y = gravity(board, x);
