@@ -31,9 +31,8 @@ int main() {
 }
 
 void active(char board[HEIGHT][WIDTH], char p) {
-    int y, x;
-    x = getMove(board, p);
-    y = gravity(board, x);
+    int x = getMove(board, p);
+    int y = gravity(board, x);
     if (y != -1) {board[y][x] = p;}
     if (winCheck(board) == p) {
         draw(board);
@@ -45,7 +44,7 @@ void active(char board[HEIGHT][WIDTH], char p) {
 
 int getMove(char board[HEIGHT][WIDTH], char p) {
     int x = -1;
-    printf("Place %c at,(1-%i) :", p, WIDTH);
+    printf("Place %c at,(1-%i) :", p - 32, WIDTH);
 
     while (x < 0 || x > WIDTH && board[HEIGHT - 1][x] != NOBODY) {
         scanf("%i", &x);
@@ -54,15 +53,15 @@ int getMove(char board[HEIGHT][WIDTH], char p) {
 }
 
 void draw(char board[HEIGHT][WIDTH]) {
-    int k = HEIGHT-1;
+    int k = HEIGHT - 1;
     printf("#################\n##|");
     for(int i = 0; i < WIDTH; i++) {
-        printf("%i|", i+1);
+        printf("%i|", i + 1);
     }
     printf("\n");
 
     for(int y = 0; y < HEIGHT; y++) {
-        printf("#%i|", k+1);
+        printf("#%i|", k + 1);
 
         for(int x = 0; x < WIDTH; x++) {
             printf("%c|", board[y][x]);
@@ -73,7 +72,7 @@ void draw(char board[HEIGHT][WIDTH]) {
 }
 
 int gravity(char board[HEIGHT][WIDTH], int x) {
-    for(int y = HEIGHT-1; y >= 0; y--) {
+    for(int y = HEIGHT - 1; y >= 0; y--) {
         if(board[y][x] == NOBODY) {return y;}
     }
     return -1;
