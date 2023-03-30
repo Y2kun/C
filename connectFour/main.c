@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HEIGHT 6
 #define WIDTH 7
+#define HEIGHT 6
 #define WINLENGTH 4
 #define NOBODY '\0'
 #define P1 'x'
@@ -10,19 +10,19 @@
 
 //It`s alive!!!
 
-void active(char board[HEIGHT][WIDTH], char);
-int getMove(char board[HEIGHT][WIDTH], char);
-void draw(char board[HEIGHT][WIDTH]);
-int gravity(char board[HEIGHT][WIDTH], int);
-int winCheck(char board[HEIGHT][WIDTH]);
+void active(char board[WIDTH][HEIGHT], char);
+int getMove(char board[WIDTH][HEIGHT], char);
+void draw(char board[WIDTH][HEIGHT]);
+int gravity(char board[WIDTH][HEIGHT], int);
+int winCheck(char board[WIDTH][HEIGHT]);
 
 int main() {
-    char board[HEIGHT][WIDTH] = {NOBODY};
+    char board[WIDTH][HEIGHT] = {NOBODY};
     printf("CONNECT FOUR: THE GAME\n\n");
     draw(board);
 
     //Main
-    for (int i = 0; i < HEIGHT * WIDTH; i++) {
+    for (int i = 0; i < WIDTH * HEIGHT; i++) {
         active(board, P1); //Player 1
         active(board, P2); //Player 2
     }
@@ -30,10 +30,10 @@ int main() {
     return 0;
 }
 
-void active(char board[HEIGHT][WIDTH], char p) {
+void active(char board[WIDTH][HEIGHT], char p) {
     int x = getMove(board, p);
     int y = gravity(board, x);
-    if (y != -1) {board[y][x] = p;}
+    if (x != -1) {board[x][y] = p;}
     if (winCheck(board) == p) {
         draw(board);
         printf("Player %c WINS!!!\n", p);
@@ -42,17 +42,17 @@ void active(char board[HEIGHT][WIDTH], char p) {
     draw(board);
 }
 
-int getMove(char board[HEIGHT][WIDTH], char p) {
-    int x = -1;
+int getMove(char board[WIDTH][HEIGHT], char p) {
+    int y = -1;
     printf("Place %c at,(1-%i) :", p - 32, WIDTH);
 
-    while (x < 0 || x > WIDTH && board[HEIGHT - 1][x] != NOBODY) {
-        scanf("%i", &x);
+    while (y < 0 || y > WIDTH && board[WIDTH - 1][y] != NOBODY) {
+        scanf("%i", &y);
     }
-    return x - 1;
+    return y - 1;
 }
 
-void draw(char board[HEIGHT][WIDTH]) {
+void draw(char board[WIDTH][HEIGHT]) {
     int k = HEIGHT - 1;
     //drawing the first two lines
     printf("#################\n##|");
@@ -66,74 +66,74 @@ void draw(char board[HEIGHT][WIDTH]) {
         printf("#%i|", k + 1);
 
         for(int x = 0; x < WIDTH; x++) {
-            printf("%c|", board[y][x]);
+            printf("%c|", board[x][y]);
         }
         printf("\n");
         k--;
     }
 }
 
-int gravity(char board[HEIGHT][WIDTH], int x) {
-    //self explanetory
+int gravity(char board[WIDTH][HEIGHT], int x) {
+    //self explanatory
     for(int y = HEIGHT - 1; y >= 0; y--) {
-        if(board[y][x] == NOBODY) {return y;}
+        if(board[x][y] == NOBODY) {return y;}
     }
     return -1;
 }
 
-int winCheck(char board[HEIGHT][WIDTH]) {
+int winCheck(char board[WIDTH][HEIGHT]) {
     // Did anybody win vertically?
-    for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
-        for (int x = 0; x < WIDTH; x++) {
-            int res = board[y][x] + board[y+1][x] + board[y+2][x] + board[y+3][x];
+    for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
+            int res = board[x][y] + board[x+1][y] + board[x+2][y] + board[x+3][y];
             if (res == P1 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y+i][x] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y] = P1-32;}
                 return P1;
             }
             if (res == P2 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y+i][x] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y] = P2-32;}
                 return P2;
             }
         }
     }
     // Did anybody win horizontally?
-    for (int y = 0; y < HEIGHT; y++) {
-        for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
-            int res = board[y][x] + board[y][x+1] + board[y][x+2] + board[y][x+3];
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
+            int res = board[x][y] + board[x][y+1] + board[x][y+2] + board[x][y+3];
             if (res == P1 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y][x+i] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x][y+i] = P1-32;}
                 return P1;
             }
             if (res == P2 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y][x+i] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x][y+i] = P2-32;}
                 return P2;
             }
         }
     }
     // Did anybody win diagonally? (top left-bottom right)
-    for (int y = 0; y < HEIGHT + WINLENGTH - 1; y++) {
-        for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
-            int res = board[y][x] + board[y+1][x-1] + board[y+2][x-2] + board[y+3][x-3];
+    for (int x = 0; x < WIDTH + WINLENGTH - 1; x++) {
+        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
+            int res = board[x][y] + board[x+1][y-1] + board[x+2][y-2] + board[x+3][y-3];
             if (res == P1 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y+i][x-i] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y-i] = P1-32;}
                 return P1;
             }
             if (res == P2 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y+i][x-i] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y-i] = P2-32;}
                 return P2;
             }
         }
     }
     // Did anybody win diagonally? (top right-bottom left)
-    for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
-        for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
-            int res = board[y][x] + board[y+1][x+1] + board[y+2][x+2] + board[y+3][x+3];
+    for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
+        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
+            int res = board[x][y] + board[x+1][y+1] + board[x+2][y+2] + board[x+3][y+3];
             if (res == P1 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y+i][x+i] = P1-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y+i] = P1-32;}
                 return P1;
             }
             if (res == P2 * WINLENGTH) {
-                for(int i = 0; i < WINLENGTH; i++) {board[y+i][x+i] = P2-32;}
+                for(int i = 0; i < WINLENGTH; i++) {board[x+i][y+i] = P2-32;}
                 return P2;
             }
         }
