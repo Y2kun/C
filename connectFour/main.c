@@ -54,12 +54,14 @@ int getMove(char board[HEIGHT][WIDTH], char p) {
 
 void draw(char board[HEIGHT][WIDTH]) {
     int k = HEIGHT - 1;
+    //drawing the first two lines
     printf("#################\n##|");
     for(int i = 0; i < WIDTH; i++) {
         printf("%i|", i + 1);
     }
     printf("\n");
 
+    //drawing the rest of the board
     for(int y = 0; y < HEIGHT; y++) {
         printf("#%i|", k + 1);
 
@@ -72,6 +74,7 @@ void draw(char board[HEIGHT][WIDTH]) {
 }
 
 int gravity(char board[HEIGHT][WIDTH], int x) {
+    //self explanetory
     for(int y = HEIGHT - 1; y >= 0; y--) {
         if(board[y][x] == NOBODY) {return y;}
     }
