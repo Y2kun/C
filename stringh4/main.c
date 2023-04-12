@@ -11,6 +11,6 @@ int main() {
     printf("Input an string to search for in the first string:");
     fgets(search, length, stdin);
     search[strcspn(search, "\n")] = 0;
-    if(strstr(array, search)) { printf("%s", search);}
+    if(strstr(array, search)) { printf("%s is in the string", search);}
     return 0;
 }

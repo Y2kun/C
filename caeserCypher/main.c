@@ -23,18 +23,18 @@ int main() {
 int cleanup(char code[LENGTH]) {
     for(int i = 0; i < LENGTH; i++) {
         if(code[i] == ' ') {code[i] = code[i+1]; code[i+1] = ' ';}
-        if(code[i] == '\0') {return i;}
+        if(code[i] == '\0') {return i-1;}
     }
 }
 
 void toupper(char code[LENGTH], int length) {
-    for(int i = 0; i < length - 1; i++) {
+    for(int i = 0; i < length; i++) {
         if(code[i] >= 97 && code[i] <= 122) {code[i] = code[i] - 32;}
     }
 }
 
 void encrypt(char code[LENGTH], int shift, int length) {
-    for(int i = 0; i < length - 1; i++) {
+    for(int i = 0; i < length; i++) {
         code[i] = (code[i] - 65 + shift) % 26 + 65;
     }
 }
