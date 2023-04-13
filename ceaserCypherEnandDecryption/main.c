@@ -24,14 +24,15 @@ int main() {
 }
 
 void encrypt(char code[LENGTH], int shift, int length) {
-    char cache[LENGTH] = {' '};
+    char cache[LENGTH] = {'\0'};
     int j = 0;
-    for(int i = 0; i < LENGTH; i++) {
+    for(int i = 0; i < length + 1; i++) {
         if(code[i] == '\0') {break;}
-        if(code[i] == ' ') {}
-        else {cache[i] = code[i];}
+        if(code[i] == ' ') {j++;}
+        else {cache[i-j] = code[i];}
     }
     strcpy(code, cache);
+    length = strlen(code) - 1;
     for(int i = 0; i < length; i++) {
         if(code[i] >= 97 && code[i] <= 122) {code[i] = code[i] - 32;}
     }
