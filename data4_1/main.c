@@ -7,7 +7,7 @@ int main() {
     char name[LENGTH] = {"\0"};
     char buffer[LENGTH] = {"\0"};
     char bounty[LENGTH] = {"\0"};
-    FILE *html, *person;
+    FILE *person;
 
     printf("Please Input the name of the person for the Bounty:");
     fgets(name, LENGTH, stdin);
