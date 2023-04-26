@@ -42,6 +42,5 @@ int main() {
     person = fopen(strcat(name, ".html"), "w");
     fprintf(person, buffer);
     fclose(person);
-    system(strcat("start", strcat(name, ".html")));
     return 0;
 }
