@@ -4,7 +4,7 @@
 #define WIDTH 7
 #define HEIGHT 6
 #define WINLENGTH 4
-#define NOBODY '\0'
+#define NOBODY ' '
 #define P1 'x'
 #define P2 'o'
 
@@ -19,6 +19,13 @@ int winCheck(char board[WIDTH][HEIGHT]);
 int main() {
     char board[WIDTH][HEIGHT] = {};
     printf("CONNECT FOUR: THE GAME\n\n");
+
+    for(int y = 0; y < HEIGHT; y++) {
+        for(int x = 0; x < WIDTH; x++) {
+            board[x][y] = NOBODY;
+        }
+    }
+
     draw(board);
 
     //Main
