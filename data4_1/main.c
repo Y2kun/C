@@ -12,7 +12,7 @@ int main() {
     printf("Please Input the name of the person for the Bounty:");
     fgets(name, LENGTH, stdin);
     printf("Please Input the size of the bounty:");
-    scanf("%s", bounty);
+    fgets(bounty, LENGTH, stdin);
     //strip
     name[strcspn(name, "\n")] = 0;
     bounty[strcspn(bounty, "\n")] = 0;
@@ -32,7 +32,7 @@ int main() {
     strcat(buffer, name);
     strcat(buffer, "</h3>\n"
                    "    <br>\n"
-                   "    <h2>Reward</h2>");
+                   "    <h2>Reward</h2>\n\t</h2>");
     strcat(buffer, bounty);
     strcat(buffer, "</h2>\n"
                    "</body>\n"
