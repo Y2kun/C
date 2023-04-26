@@ -20,6 +20,7 @@ int main() {
     char board[WIDTH][HEIGHT] = {};
     printf("CONNECT FOUR: THE GAME\n\n");
 
+    //filling array with spaces
     for(int y = 0; y < HEIGHT; y++) {
         for(int x = 0; x < WIDTH; x++) {
             board[x][y] = NOBODY;
@@ -117,9 +118,9 @@ int winCheck(char board[WIDTH][HEIGHT]) {
             }
         }
     }
-    // Did anybody win diagonally? (top left-bottom right)
-    for (int x = 0; x < WIDTH + WINLENGTH - 1; x++) {
-        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
+    // Did anybody win diagonally? (top right-bottom left)
+    for (int x = 0; x < WIDTH - 1; x++) {
+        for (int y = 0; y < HEIGHT+ 1; y++) {
             int res = board[x][y] + board[x+1][y-1] + board[x+2][y-2] + board[x+3][y-3];
             if (res == P1 * WINLENGTH) {
                 for(int i = 0; i < WINLENGTH; i++) {board[x+i][y-i] = P1-32;}
@@ -131,9 +132,9 @@ int winCheck(char board[WIDTH][HEIGHT]) {
             }
         }
     }
-    // Did anybody win diagonally? (top right-bottom left)
-    for (int x = 0; x < WIDTH - WINLENGTH + 1; x++) {
-        for (int y = 0; y < HEIGHT - WINLENGTH + 1; y++) {
+    // Did anybody win diagonally? (top left-bottom right)
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
             int res = board[x][y] + board[x+1][y+1] + board[x+2][y+2] + board[x+3][y+3];
             if (res == P1 * WINLENGTH) {
                 for(int i = 0; i < WINLENGTH; i++) {board[x+i][y+i] = P1-32;}
