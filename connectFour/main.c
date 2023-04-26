@@ -17,7 +17,7 @@ int gravity(char board[WIDTH][HEIGHT], int);
 int winCheck(char board[WIDTH][HEIGHT]);
 
 int main() {
-    char board[WIDTH][HEIGHT] = {NOBODY};
+    char board[WIDTH][HEIGHT] = {};
     printf("CONNECT FOUR: THE GAME\n\n");
     draw(board);
 
