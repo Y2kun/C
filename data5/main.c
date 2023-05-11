@@ -7,6 +7,7 @@
 
 void write(char[LENGTH],char[LENGTH],char[LENGTH],char[LENGTH]);
 void gender();
+void average();
 
 int main() {
     char name[LENGTH] = {'\0'};
@@ -39,6 +40,7 @@ int main() {
         write(name,age,salery,sex);
     }
     gender();
+    average();
 
     return 0;
 }
@@ -66,12 +68,27 @@ void gender() {
 
     for(int i = 0; i < LENGTH; i++) {
         if(array[i] == '\n') {
-            if(array[i-0] == 'w' || array[i-0] == 'W') {
+            if(array[i-2] == 'w' || array[i-2] == 'W') {
                 counter++;
             }
         }
     }
 
     printf("The amount of women in the file is:%i\n", counter);
+    fclose(fptr);
+}
+
+void average() {
+    FILE *fptr;
+    fptr = fopen("sub/persons.csv","r");
+    char name[LENGTH] = {'\0'};
+    float age = 0, salery = 0, ageaverage = 0;
+    char sex[LENGTH] = {'\0'};
+
+    while (fscanf("%s, %f, %s, %s", name, age, salery, sex) != NULL) {
+        ageaverage += age;
+    }
+
+    printf("The average age in the file is:%f\n", ageaverage);
     fclose(fptr);
 }
