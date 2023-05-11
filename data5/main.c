@@ -81,14 +81,20 @@ void gender() {
 void average() {
     FILE *fptr;
     fptr = fopen("sub/persons.csv","r");
+    char array[LENGTH] = {'\0'};
     char name[LENGTH] = {'\0'};
     float age = 0, salery = 0, ageaverage = 0;
+    float count = 0;
     char sex[LENGTH] = {'\0'};
 
-    while (fscanf("%s, %f, %s, %s", name, age, salery, sex) != NULL) {
+
+
+    while (fgets(array, LENGTH, fptr) != 0) {
+        sscanf(array,"%s %f, %f, %s\n", name, &age, &salery, sex);
         ageaverage += age;
+        count++;
     }
 
-    printf("The average age in the file is:%f\n", ageaverage);
+    printf("The average age in the file is:%.2f\n", ageaverage/count);
     fclose(fptr);
 }

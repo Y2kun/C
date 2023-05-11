@@ -68,4 +68,5 @@ void printHeader(char h[], int *index) {
         printf("%c", h[*index]);
         (*index)++;
     }
+    (*index)++;
 }
