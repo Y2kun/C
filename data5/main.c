@@ -84,7 +84,7 @@ void average() {
     char array[LENGTH] = {'\0'};
     char name[LENGTH] = {'\0'};
     float age = 0, salery = 0, ageaverage = 0;
-    float count = 0;
+    int count = 0;
     char sex[LENGTH] = {'\0'};
 
 
