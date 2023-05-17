@@ -38,6 +38,10 @@ int main() {
         // reading leftover numbers
         while(fscanf(in, "%d\t%f\t%c", &nr[i], &num[i], &valid[i]) != EOF) {
             i++;
+
+            *num = (float*) malloc(sizeof(float));
+            *nr = (int*) malloc(sizeof(int));
+            *valid = (char*) malloc(sizeof(char));
         }
     }
     fclose(in);
