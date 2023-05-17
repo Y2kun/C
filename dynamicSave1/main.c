@@ -39,9 +39,9 @@ int main() {
         while(fscanf(in, "%d\t%f\t%c", &nr[i], &num[i], &valid[i]) != EOF) {
             i++;
 
-            *num = (float*) malloc(sizeof(float));
-            *nr = (int*) malloc(sizeof(int));
-            *valid = (char*) malloc(sizeof(char));
+            num = realloc(num, (i+1) *sizeof(float));
+            nr = realloc(nr, (i+1) *sizeof(int));
+            valid = realloc(valid, (i+1) *sizeof(char));
         }
     }
     fclose(in);
