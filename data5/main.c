@@ -90,11 +90,11 @@ void average() {
 
 
     while (fgets(array, LENGTH, fptr) != 0) {
-        sscanf(array,"%s %f, %f, %s\n", name, &age, &salery, sex);
+1        sscanf(array,"%s %f, %f, %s\n", name, &age, &salery, sex);
         ageaverage += age;
         count++;
     }
 
-    printf("The average age in the file is:%.2f\n", ageaverage/count);
+    printf("The average age in the file is:%.2f\n", ageaverage/(count-1));
     fclose(fptr);
 }
