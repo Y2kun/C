@@ -1,30 +1,49 @@
 #include <stdio.h>
 #include <malloc.h>
 
-float CalcStat(int*, int, int);
+void CalcStat(int*, int, int);
 
+
+//does not work
 int main() {
     FILE *file;
-    file = fopen("/sub/temp.txt", "r+");
-    int* list = (int*) malloc(sizeof(int));
-    int num = 0, mode = 0;
+    file = fopen("./sub/temp.txt", "r");
+    int *list = (int *) malloc(sizeof(int));
+    int length = 0, num = 0;
 
-    printf("What mode should be used?(1-average, 2-min, 3-max):");
-    scanf("%i", mode);
-
-    while (fscanf(file, "%f\n", list) != EOF) {
-        num++;
-        realloc(list, num * (sizeof(int)+1));
+    //Self explanitory
+    if(file == NULL) {
+        printf("Error: File not Found");
+        return 404;
     }
 
-    printf("%.2f", CalcStat(list, num, mode));
+    while (fscanf(file, "%i\n", &num) != EOF) {
+        list[length] = num;
+        length++;
+        realloc(list, (length + 1) * (sizeof(int)));
+    }
+    fclose(file);
+
+    for(int i = 0; i <= 3; i++) {
+        CalcStat(list, length, i);
+    }
 
     free(list);
-    fclose(file);
     return 0;
 }
 
-float CalcStat(int* list, int num, int mode) {
+void CalcStat(int* list, int num, int mode) {
+    FILE *file;
+    file = fopen("/sub/temp.txt", "a");
     float allTemp = 0;
-    return 0;
+    int min = INT_MAX, max = INT_MIN;
+    for(int i = 0; i <= num; i++) {
+        allTemp += list[i];
+        if(list[i] <= min) {min = list[i];}
+        if(list[i] >= max) {max = list[i];}
+    }
+    if(mode == 0) {fprintf(file, "-------------------\n");}
+    else if(mode == 1) {fprintf(file, "Average: %f °C\n", allTemp/num);}
+    else if(mode == 2) {fprintf(file, "Minimum: %i °C\n", min);}
+    else if(mode == 3) {fprintf(file, "Maximum: %i °C\n", max);}
 }
