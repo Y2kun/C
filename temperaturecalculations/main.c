@@ -3,7 +3,6 @@
 
 void CalcStat(int*, int, int);
 
-//does not work
 int main() {
     FILE *file;
     file = fopen("./sub/temp.txt", "r");
@@ -33,16 +32,17 @@ int main() {
 
 void CalcStat(int* list, int num, int mode) {
     FILE *file;
-    file = fopen("/sub/temp.txt", "a");
+    file = fopen("./sub/temp.txt", "a");
     float allTemp = 0;
     int min = INT_MAX, max = INT_MIN;
-    for(int i = 0; i <= num; i++) {
+    for(int i = 0; i < num; i++) {
         allTemp += list[i];
         if(list[i] <= min) {min = list[i];}
         if(list[i] >= max) {max = list[i];}
     }
-    if(mode == 0) {fprintf(file, "-------------------\n");}
-    else if(mode == 1) {fprintf(file, "Average: %f °C\n", allTemp/num);}
-    else if(mode == 2) {fprintf(file, "Minimum: %i °C\n", min);}
-    else if(mode == 3) {fprintf(file, "Maximum: %i °C\n", max);}
+    if      (mode == 0) {fprintf(file, "\n-----------------\n");}
+    else if (mode == 1) {fprintf(file, "Average: %.2f °C\n", allTemp/num);}
+    else if (mode == 2) {fprintf(file, "Minimum: %i °C\n", min);}
+    else if (mode == 3) {fprintf(file, "Maximum: %i °C", max);}
+    fclose(file);
 }
