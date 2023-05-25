@@ -3,7 +3,6 @@
 
 void CalcStat(int*, int, int);
 
-
 //does not work
 int main() {
     FILE *file;
