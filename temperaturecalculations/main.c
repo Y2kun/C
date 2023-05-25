@@ -9,7 +9,7 @@ int main() {
     int *list = (int *) malloc(sizeof(int));
     int length = 0, num = 0;
 
-    //Self explanitory
+    //Self explanatory
     if(file == NULL) {
         printf("Error: File not Found");
         return 404;
