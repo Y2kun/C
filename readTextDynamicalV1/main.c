@@ -6,6 +6,7 @@
 
 int main() {
     FILE *file;
+    char c = '\0';
     char fileName[NAMELENGTH] = {'\0'};
     char *text = (char *) malloc(sizeof(char));
     int i = 0;
@@ -14,16 +15,18 @@ int main() {
     printf("Please input the directory of the file:");
     fgets(fileName, NAMELENGTH, stdin);
     fileName[strcspn(fileName, "\n")] = 0;
-    file = fopen(fileName, "w");
+    file = fopen(fileName, "a");
 
-    while(fscanf(stdin, "%c", &text[i]) != '\n') {
-        //text[i] = getc(stdin);
+    printf("Please input what you want the file to contain:\n");
+    while(c != '\n') {
+        c = getc(stdin);
+        text[i] = c;
         i++;
         realloc(text, (i + 1) * (sizeof(char)));
     }
 
-    fprintf(fileName, "%s", text);
-
+    text[i] = '\0';
+    fprintf(file, "%s", text);
     free(text);
     fclose(file);
     return 0;
