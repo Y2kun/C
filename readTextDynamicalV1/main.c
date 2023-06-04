@@ -17,7 +17,10 @@ int main() {
     fgets(fileName, NAMELENGTH, stdin);
     fileName[strcspn(fileName, "\n")] = 0;
     file = fopen(fileName, "w+");
-    if(file == NULL) {return 1;}
+    if(file == NULL) {
+        printf("\nFile not found");
+        return 404;
+    }
 
     printf("Please input what you want the file to contain:\n");
     while(c != '\n') {
