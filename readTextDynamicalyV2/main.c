@@ -8,6 +8,7 @@ int main() {
     FILE *file;
     char c = '\0';
     char fileName[NAMELENGTH] = {'\0'};
+    char *text = (char *) malloc(sizeof(char));
     int i = 0;
     int newSize;
 
@@ -22,16 +23,17 @@ int main() {
     }
 
     printf("Please input what you want the file to contain:\n");
-    char *text = (char *) malloc(sizeof(char));
-    while(c != '\n') {
-        c = getc(stdin);
-        text[i] = c;
-        i++;
-        newSize = (i + 1) * (sizeof(char));
-        text = realloc(text, newSize);
-        if (text == NULL) {
-            printf("Extending text length failed!");
-            return 1;
+    while(getc(stdin) != 'x') {
+        while(c != '\n') {
+            c = getc(stdin);
+            text[i] = c;
+            i++;
+            newSize = (i + 1) * (sizeof(char));
+            text = realloc(text, newSize);
+            if (text == NULL) {
+                printf("Extending text length failed!");
+                return 1;
+            }
         }
     }
 
