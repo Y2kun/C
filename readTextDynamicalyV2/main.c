@@ -8,7 +8,7 @@ int main() {
     FILE *file;
     char c = '\0';
     char fileName[NAMELENGTH] = {'\0'};
-    char *text = (char *) malloc(sizeof(char));
+    char *text = malloc(sizeof(char));
     int i = 0;
     int newSize;
 
