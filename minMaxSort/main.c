@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAX 10
 
 void output(int a[MAX]);
+int cmpfunc (const void * a, const void * b) {return ( *(int*)a - *(int*)b );}
 
 int main() {
     int a[MAX] = {9, 5, 10, 6, 2, 53, 6, 2, 1, 3};
@@ -18,6 +20,8 @@ int main() {
             }
         }
     }
+    //quicksort
+    qsort(a, MAX, sizeof(int), cmpfunc);
     output(a);
     return 0;
 }
